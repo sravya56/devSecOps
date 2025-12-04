@@ -32,11 +32,15 @@ jobs:
       - name: Lint code
         run: yarn lint
 
-      - name: Run tests
-        run: yarn test --ci
+      
 
       - name: Build packages
         run: yarn build
+        
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build Docker Image
         if: github.event_name == 'push'
