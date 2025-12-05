@@ -1,4 +1,6 @@
-{
+
+
+  {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     "module": "ES2015",
@@ -31,3 +33,6 @@
   },
   "include": ["src/**/*.ts", "__tests__/**/*.ts"]
 }
+
+
+
