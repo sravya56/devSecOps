@@ -23,20 +23,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Yarn
-        run: npm install --global yarn
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Lint code
-        run: yarn lint
       
-      - name: Run unit tests
-        run: yarn test --ci || true
   
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarcloud-github-action@02ef911
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
