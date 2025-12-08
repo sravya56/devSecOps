@@ -22,12 +22,7 @@ jobs:
         run: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
       - name: Run Grype Scan
         run: grype . -o json > grype-report.json
-      - name: Upload Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: grype-report
-          path: grype-report.json
-
+     
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
