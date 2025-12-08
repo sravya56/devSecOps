@@ -20,11 +20,11 @@ jobs:
 
       - name: Install grype
         run : |
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo sh -s -- -b /usr/local/bin
       
       - name: Run Grype
         run: |
-          ./bin/grype dir:. --fail-on high 
+          grype dir:. --fail-on high 
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
