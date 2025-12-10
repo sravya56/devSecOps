@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies 
-        run: yarn install --frozen-lockfile --ignore scripts
+      # - name: Install dependencies 
+      #   run: yarn install --frozen-lockfile --ignore scripts
 
 
       - name: SonarCloud Scan
