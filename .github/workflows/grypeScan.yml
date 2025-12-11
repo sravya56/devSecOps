@@ -20,9 +20,15 @@ jobs:
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
+     
+      - name: Run Grype scan (table output)
+        run: grype .
+
+      
 
       - name: Run Grype Scan (JSON output)
         run: grype . -o json > grype-report.json
+        
 
       - name: Upload Grype Report as Artifact
         uses: actions/upload-artifact@v4
