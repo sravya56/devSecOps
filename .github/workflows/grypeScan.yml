@@ -22,12 +22,12 @@ jobs:
             | sh -s -- -b /usr/local/bin
      
       - name: Run Grype scan (table output)
-        run: grype . --exclude node_modules -o json > grype-report.json
+        run: grype . --exclude './node_modules' -o json > grype-report.json
 
       
 
-      - name: Run Grype Scan (JSON output)
-        run: grype . -o json > grype-report.json
+    #   - name: Run Grype Scan (JSON output)
+    #     run: grype . -o json > grype-report.json
         
 
       - name: Upload Grype Report as Artifact
