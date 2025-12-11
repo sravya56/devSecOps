@@ -22,7 +22,7 @@ jobs:
             | sh -s -- -b /usr/local/bin
      
       - name: Run Grype scan (table output)
-        run:  grype . --exclude node_modules -o json > grype-report.json
+        run: grype . --exclude node_modules -o json > grype-report.json
 
       
 
