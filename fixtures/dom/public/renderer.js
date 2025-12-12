@@ -138,20 +138,35 @@
     });
   }
 
-  function injectFixture(src) {
-    Fixture = new Function(src + '\nreturn Fixture;')();
+  // function injectFixture(src) {
+  //   Fixture = new Function(src + '\nreturn Fixture;')();
 
-    if (typeof Fixture === 'undefined') {
-      setStatus('Failed');
-      output.innerHTML = 'Please name your root component "Fixture"';
-    } else {
-      prerender().then(function () {
-        if (getBooleanQueryParam('hydrate')) {
-          render();
-        }
-      });
-    }
+  //   if (typeof Fixture === 'undefined') {
+  //     setStatus('Failed');
+  //     output.innerHTML = 'Please name your root component "Fixture"';
+  //   } else {
+  //     prerender().then(function () {
+  //       if (getBooleanQueryParam('hydrate')) {
+  //         render();
+  //       }
+  //     });
+  //   }
+  // }
+  function injectFixture(src) {
+  Fixture = new Function(src + '\nreturn Fixture;')();
+
+  if (typeof Fixture === 'undefined') {
+    setStatus('Failed');
+    output.innerHTML = 'Please name your root component "Fixture"';
+  } else {
+    prerender().then(function () {
+      if (getBooleanQueryParam('hydrate')) {
+        render();
+      }
+    });
   }
+}
+
 
   function reloadFixture(code) {
     renders = 0;
