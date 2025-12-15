@@ -15,29 +15,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        # Step 2: Setup Node.js
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: yarn
 
-      # Step 3: Install dependencies
       - name: Install dependencies
-        run:  yarn install --frozen-lockfile --ignore-scripts
+        run: yarn install --frozen-lockfile --ignore-scripts
 
       - name: Install Grype
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
-     
-      - name: Run Grype scan (table output)
+
+      - name: Run Grype Scan (JSON output)
+        run: grype . -o json --add-cpes-if-none > grype-report.json
+
+      - name: Run Grype Scan (table output)
         run: grype . -o table --add-cpes-if-none
-
-      
-
-    #   - name: Run Grype Scan (JSON output)
-    #     run: grype . -o json > grype-report.json
-        
 
       - name: Upload Grype Report as Artifact
         uses: actions/upload-artifact@v4
