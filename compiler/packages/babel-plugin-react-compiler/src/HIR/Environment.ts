@@ -897,6 +897,7 @@ export class Environment {
           this.outputMode,
           `Unexpected output mode '${this.outputMode}'`,
         );
+        return false; // fallback, unreachable in practice
       }
     }
   }
