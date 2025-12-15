@@ -30,8 +30,8 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
 
-      - name: Run Grype Scan (JSON output)
-        run: grype . -o json --add-cpes-if-none > grype-report.json
+      # - name: Run Grype Scan (JSON output)
+      #   run: grype . -o json --add-cpes-if-none > grype-report.json
 
       - name: Run Grype Scan (table output)
         run: grype . -o table --add-cpes-if-none
