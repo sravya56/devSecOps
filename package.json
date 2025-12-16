@@ -158,7 +158,8 @@
   "resolutions": {
     "react-is": "npm:react-is",
     "jsdom": "22.1.0",
-    "**/json5": "2.2.2"
+    "**/json5": "^2.2.3",
+    "**/trim": "0.0.3"
     
   },
   "packageManager": "yarn@1.22.22"
