@@ -138,40 +138,40 @@
     });
   }
 
-  // function injectFixture(src) {
-  //   Fixture = new Function(src + '\nreturn Fixture;')();
+  function injectFixture(src) {
+    Fixture = new Function(src + '\nreturn Fixture;')();
 
-  //   if (typeof Fixture === 'undefined') {
-  //     setStatus('Failed');
-  //     output.innerHTML = 'Please name your root component "Fixture"';
-  //   } else {
-  //     prerender().then(function () {
-  //       if (getBooleanQueryParam('hydrate')) {
-  //         render();
-  //       }
-  //     });
-  //   }
-  // }
- function injectFixture(src) {
-  const blob = new Blob([src], { type: "text/javascript" });
-  const url = URL.createObjectURL(blob);
-
-  const script = document.createElement("script");
-  script.src = url;
-
-  script.onload = () => {
-    if (typeof window.Fixture === "undefined") {
-      setStatus("Failed");
+    if (typeof Fixture === 'undefined') {
+      setStatus('Failed');
       output.innerHTML = 'Please name your root component "Fixture"';
     } else {
-      Fixture = window.Fixture;
-      prerender().then(() => {
-        if (getBooleanQueryParam("hydrate")) {
+      prerender().then(function () {
+        if (getBooleanQueryParam('hydrate')) {
           render();
         }
       });
     }
-  };
+  }
+//  function injectFixture(src) {
+//   const blob = new Blob([src], { type: "text/javascript" });
+//   const url = URL.createObjectURL(blob);
+
+//   const script = document.createElement("script");
+//   script.src = url;
+
+//   script.onload = () => {
+//     if (typeof window.Fixture === "undefined") {
+//       setStatus("Failed");
+//       output.innerHTML = 'Please name your root component "Fixture"';
+//     } else {
+//       Fixture = window.Fixture;
+//       prerender().then(() => {
+//         if (getBooleanQueryParam("hydrate")) {
+//           render();
+//         }
+//       });
+//     }
+//   };
 
   document.body.appendChild(script);
 }
