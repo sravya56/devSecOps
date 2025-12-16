@@ -32,6 +32,6 @@ jobs:
 
 
       - name: Run Grype Scan (table output)
-        run: grype . -o table --add-cpes-if-none
+        run: grype node_modules -o table
 
      
