@@ -158,7 +158,8 @@
   "resolutions": {
     "react-is": "npm:react-is",
     "jsdom": "22.1.0",
-    "loader-utils": "^1.4.1"
+    "json5": "2.2.2"
+    
   },
   "packageManager": "yarn@1.22.22"
 }
