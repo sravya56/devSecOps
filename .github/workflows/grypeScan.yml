@@ -32,6 +32,6 @@ jobs:
 
 
       - name: Run Grype Scan (table output)
-        run: grype dir:node_modules -o table -n react-project -v 1.0.0 --add-cpes-if-none
+        run: grype dir:node_modules -o table --add-cpes-if-none
 
      
