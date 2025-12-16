@@ -30,14 +30,8 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
 
-      # - name: Run Grype Scan (JSON output)
-      #   run: grype . -o json --add-cpes-if-none > grype-report.json
 
       - name: Run Grype Scan (table output)
         run: grype . -o table --add-cpes-if-none
 
-      - name: Upload Grype Report as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: grype-report
-          path: grype-report.json
+     

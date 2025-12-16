@@ -173,9 +173,7 @@
     }
   };
 
-  document.body.appendChild(script);
-}
-
+ 
 
 
   function reloadFixture(code) {
