@@ -15,16 +15,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: 'yarn'
-
-      # - name: 📦 Install dependencies
-      #   run: yarn install --frozen-lockfile -ignore scripts
-
-      - name:  Install Grype CLI (To Global Path)
+      - name: ⬇️ Install Grype CLI (To Global Path)
         run: |
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo sh -s -- -b /usr/local/bin v0.97.1
           grype version # Verify installation
@@ -33,3 +24,4 @@ jobs:
         run: grype . -o table --add-cpes-if-none
 
 
+      
