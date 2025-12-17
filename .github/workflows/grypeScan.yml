@@ -70,18 +70,3 @@ jobs:
       - name: Run Grype scan (table output)
         run: grype . -o table --add-cpes-if-none
 
-
-      - name: 🔎 Run Grype Scan (No Failure)
-        run: grype dir:. -o json --file grype-report.json
-        
-      - name: 📤 Print Grype Report Content
-        run: |
-          echo "--- START GRYPE REPORT ---"
-          cat grype-report.json
-          echo "--- END GRYPE REPORT ---"
-          
-      - name: ⬆️ Upload Grype Report Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: grype-security-report
-          path: grype-report.json
