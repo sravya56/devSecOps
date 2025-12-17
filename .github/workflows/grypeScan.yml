@@ -59,8 +59,8 @@ jobs:
           node-version: 18
           cache: 'yarn'
 
-      - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile -ignore scripts
+      # - name: 📦 Install dependencies
+      #   run: yarn install --frozen-lockfile -ignore scripts
 
       - name: ⬇️ Install Grype CLI (To Global Path)
         run: |
