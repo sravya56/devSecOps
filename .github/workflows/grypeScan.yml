@@ -30,9 +30,7 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
 
-      - name: Upgrade minimist in CI (Yarn)
-        run: yarn add minimist@1.2.6
-      
+            
       - name: Run Grype Scan (table output)
         run: grype dir:node_modules -o table --add-cpes-if-none
 
