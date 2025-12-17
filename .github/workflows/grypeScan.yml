@@ -60,7 +60,7 @@ jobs:
           cache: 'yarn'
 
       - name: 📦 Install dependencies
-        run: yarn install --immutable --mode=skip-build
+        run: yarn install --immutable --mode=skip-build - ignore scripts
 
       - name: ⬇️ Install Grype CLI (To Global Path)
         run: |
