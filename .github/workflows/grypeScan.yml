@@ -30,7 +30,10 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
             | sh -s -- -b /usr/local/bin
 
-
+      - name: Fix vulnerabilities in CI (package-lock only)
+        run: |
+          npm audit fix --package-lock-only
+      
       - name: Run Grype Scan (table output)
         run: grype dir:node_modules -o table --add-cpes-if-none
 
