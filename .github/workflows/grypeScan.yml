@@ -1,37 +1,87 @@
-name: "Grype Vulnerability Scan"
+# name: "Grype Vulnerability Scan"
+
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+
+# jobs:
+#   scan:
+#     name: Grype Dependency Scan
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: "20"
+#           cache: yarn
+
+#       - name: Install dependencies
+#         run: yarn install --frozen-lockfile --ignore-scripts
+
+#       - name: Install Grype
+#         run: |
+#           curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
+#             | sh -s -- -b /usr/local/bin
+
+
+#       - name: Run Grype Scan (table output)
+#         run: grype dir:node_modules -o table --add-cpes-if-none
+
+     
+
+# .github/workflows/grype.yaml
+name: 📦 DevSecOps - Dependency Scan (Grype SCA)
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
-  scan:
-    name: Grype Dependency Scan
+  grype_scan:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: yarn
+          node-version: 18
+          cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile --ignore-scripts
+      - name: 📦 Install dependencies
+        run: yarn install --immutable --mode=skip-build
 
-      - name: Install Grype
+      - name: ⬇️ Install Grype CLI (To Global Path)
         run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
-            | sh -s -- -b /usr/local/bin
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sudo sh -s -- -b /usr/local/bin v0.97.1
+          grype version # Verify installation
+          
+      - name: Run Grype scan (table output)
+        run: grype . -o table --add-cpes-if-none
 
 
-      - name: Run Grype Scan (table output)
-        run: grype dir:node_modules -o table --add-cpes-if-none
-
-     
+      - name: 🔎 Run Grype Scan (No Failure)
+        run: grype dir:. -o json --file grype-report.json
+        
+      - name: 📤 Print Grype Report Content
+        run: |
+          echo "--- START GRYPE REPORT ---"
+          cat grype-report.json
+          echo "--- END GRYPE REPORT ---"
+          
+      - name: ⬆️ Upload Grype Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-security-report
+          path: grype-report.json
